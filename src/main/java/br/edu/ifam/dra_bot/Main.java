@@ -11,8 +11,10 @@ public class Main {
         try{
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             telegramBotsApi.registerBot(new DraBot());
+            System.out.println("Bot online!");
         }catch(TelegramApiException e){
             e.printStackTrace();
+            System.out.println("Erro ao criar o bot");
         }
     }
 }

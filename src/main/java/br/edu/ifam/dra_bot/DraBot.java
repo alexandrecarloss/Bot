@@ -96,8 +96,14 @@ public class DraBot extends TelegramLongPollingBot {
 
     //TODO: Implementar método para retornar o valor total de boletos
     public String valorTotalBoletos(){
-
-       return "";
+        float total = 0;
+        if (boletos.isEmpty()) {
+            return ("Não há boletos cadastrados!");
+        }
+        for (Boleto b : boletos){
+            total = total + b.getValor();
+        }
+        return ("O valor total dos boletos é: " + total);
     }
 
     public SendMessage responder(Update update) {
@@ -121,8 +127,9 @@ public class DraBot extends TelegramLongPollingBot {
             // Retorna a data atual
             resposta = getData();
 
+        } else if (textoMensagem.startsWith("/valortotal")){
+            resposta = valorTotalBoletos();
         } else if (textoMensagem.startsWith("/cadastroboleto")) {
-
             return processaBoleto(update, chatId);
 
         } else if (textoMensagem.startsWith("/help")) {
